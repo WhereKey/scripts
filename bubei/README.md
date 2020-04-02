@@ -1,51 +1,51 @@
-# 七猫小说
+# 不背单词
 
 > 代码已同时兼容 Surge & QuanX, 使用同一份签到脚本即可
+
 > 感谢[@danchaw](https://github.com/danchaw) PR
 ## 配置 (Surge)
 
 ```properties
 [MITM]
-xiaoshuo.qm989.com
+sapi.beingfine.cn
 
 [Script]
-http-request ^https:\/\/xiaoshuo\.qm989\.com script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/qimao/qmnovel.js
-cron "10 0 0 * * *" script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/qimao/qmnovel.js
+http-request ^https:\/\/sapi\.beingfine\.cn\/v3\/bb\/reward\/by-sign-in script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js
+cron "10 0 0 * * *" script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js
 ```
 
 ## 配置 (QuanX)
 
 ```properties
 [MITM]
-xiaoshuo.qm989.com
+sapi.beingfine.cn
 
 [rewrite_local]
 
 # [商店版]
-^https:\/\/xiaoshuo\.qm989\.com url script-request-header qmnovel.js
+^https:\/\/sapi\.beingfine\.cn\/v3\/bb\/reward\/by-sign-in url script-request-header bubei.js
 
 # [TestFlight]
-^https:\/\/xiaoshuo\.qm989\.com url script-request-header https://raw.githubusercontent.com/chavyleung/scripts/master/qimao/qmnovel.js
+^https:\/\/sapi\.beingfine\.cn\/v3\/bb\/reward\/by-sign-in url script-request-header https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js
 
 [task_local]
 
 # [商店版]
-1 0 * * * qmnovel.js
+1 0 * * * bubei.js
 
 # [TestFlight]
-1 0 * * * https://raw.githubusercontent.com/chavyleung/scripts/master/qimao/qmnovel.js
+1 0 * * * https://raw.githubusercontent.com/chavyleung/scripts/master/bubei/bubei.js
 ```
 
 ## 说明
 
-1. 先把`xiaoshuo.qm989.com`加到`[MITM]`
+1. 先把`sapi.beingfine.cn`加到`[MITM]`
 2. 再配置重写规则:
    - Surge: 把两条远程脚本放到`[Script]`
-   - QuanX: 把`qmnovel.js`传到`On My iPhone - Quantumult X - Scripts` (传到 iCloud 相同目录也可, 注意要打开 quanx 的 iCloud 开关)
-3. 暂时关闭QX或Surge中的广告屏蔽, 否则无法获取小视频奖励cookie和url
-4. 打开 APP[七猫小说](https://apps.apple.com/cn/app/%E4%B8%83%E7%8C%AB%E5%B0%8F%E8%AF%B4-%E7%9C%8B%E5%B0%8F%E8%AF%B4%E7%94%B5%E5%AD%90%E4%B9%A6%E7%9A%84%E9%98%85%E8%AF%BB%E7%A5%9E%E5%99%A8/id1387717110) 然后到APP内福利界面手动日常签到(观看小视频领取奖励),新手领福利签到,视频签到以及幸运大转盘 1 次, 系统提示: `首次写入xxxUrl成功🎉,首次写入xxxCookie成功🎉`
-5. 最后就可以把第 1 条脚本注释掉了
-6. 运行一次脚本, 如果提示重复签到, 那就算成功了!
+   - QuanX: 把`bubei.js`传到`On My iPhone - Quantumult X - Scripts` (传到 iCloud 相同目录也可, 注意要打开 quanx 的 iCloud 开关)
+3. 打开 APP[不背单词](https://apps.apple.com/cn/app/%E4%B8%8D%E8%83%8C%E5%8D%95%E8%AF%8D-%E7%9C%9F%E5%AE%9E%E8%AF%AD%E5%A2%83%E5%AD%A6%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D/id698570469) 然后手动签到 1 次, 系统提示: `首次写入不背单词Url成功🎉`和`首次写入不背单词Cookie成功🎉`
+4. 最后就可以把第 1 条脚本注释掉了
+5. 运行一次脚本, 如果提示说明:aceess_denied#30103, 那就算成功了!
 
 > 第 1 条脚本是用来获取 cookie 的, 用浏览器访问一次获取 cookie 成功后就可以删掉或注释掉了, 但请确保在`登录成功`后再获取 cookie.
 
